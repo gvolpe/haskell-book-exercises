@@ -25,6 +25,6 @@ either' :: (a -> c) -> (b -> c) -> Either a b -> c
 either' f g (Right x) = g x
 either' f g (Left x)  = f x
 
--- There's no info about (a -> c) here to define it in terms of either', don't know how to do it...
+-- (a -> c) can just return Nothing
 eitherMaybe'' :: (b -> c) -> Either a b -> Maybe c
-eitherMaybe'' = undefined
+eitherMaybe'' f = either' (\x -> Nothing) (\x -> Just $ f x)
